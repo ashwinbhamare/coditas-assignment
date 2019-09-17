@@ -1,0 +1,36 @@
+section.search_bar_sec{
+    background: #147abc;
+    padding: 15px;
+} 
+.search_bar_sec select, .search_bar_sec input{
+    height: 45px; 
+    color:#000;
+}
+div.users {
+    background: #fff; 
+    padding: 15px 40px;
+    margin-bottom: 30px;
+}
+.toggle-btn{
+    background: transparent;
+    color: rgb(119, 156, 188);
+    border: 2px solid rgb(119, 156, 188);
+    font-weight: 500;
+    padding: 4px 28px;
+}
+p.user_name {
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+p.user_profile, .user_data{
+    font-size: 14px;
+}
+.user_data{
+    margin-bottom: 00px;
+}
+div.users .card.card-body{
+    border:0px;
+}
+section.user {
+    padding: 35px;
+}
