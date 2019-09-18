@@ -1,3 +1,4 @@
+/* Search Bar */
 section.search_bar_sec{
     background: #147abc;
     padding: 15px;
@@ -6,10 +7,44 @@ section.search_bar_sec{
     height: 45px; 
     color:#000;
 }
+select.sort{
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+.sort-label, .search_label{
+    display: block;
+    position: relative;
+}
+.search_label:after{
+    content:"\f002";
+    font-size: 17px;
+}
+.sort-label:after, .search_label:after{
+    font:normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    top: 25%;
+    right: 10%;
+}
+.sort-label:after{
+    content:"\f107";
+    font-size: 20px;
+}
+
+/* Users */
+.ttl-reslts{
+    font-weight: 500;
+}
 div.users {
     background: #fff; 
-    padding: 15px 40px;
     margin-bottom: 30px;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.15);
+}
+div.users .user_row{
+    padding: 15px 40px;
+}
+.user_avtar{
+    width: 150px;height: 150px;
 }
 .toggle-btn{
     background: transparent;
@@ -17,6 +52,11 @@ div.users {
     border: 2px solid rgb(119, 156, 188);
     font-weight: 500;
     padding: 4px 28px;
+    box-shadow: none;
+}
+.toggle-btn:hover{
+    background: rgb(119, 156, 188);
+    color:#fff;
 }
 p.user_name {
     font-size: 24px;
@@ -29,8 +69,21 @@ p.user_profile, .user_data{
     margin-bottom: 00px;
 }
 div.users .card.card-body{
-    border:0px;
+    border:0px;padding:0px; 
 }
 section.user {
     padding: 35px;
+}
+
+/* Loader */
+section.loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #000;
+    opacity: 0.8;
+    padding-top: 18%
 }

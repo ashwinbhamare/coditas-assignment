@@ -1,65 +1,126 @@
+<!-- Search Bar Section -->
 <section class="search_bar_sec">
     <div class="container">      
         <div class="search_bar">
             <div class="row">    
                 <div class="col-md-6">
-                    <select name="sort" id="" class="form-control">
-                        <option>Sort User</option>
-                    </select>
+                    <label class="sort-label">
+                        <select name="sort" id="" class="form-control sort" (change)="sort($event)">
+                            <option>Sort By Name</option>
+                            <option value="a">Name (A-Z)</option>
+                            <option value="z">Name (Z-A)</option>
+                        </select>
+                    </label>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="search" class="form-control" placeholder="Search User">
+                    <label for="search" class="search_label">
+                        <input id="search" type="text" name="search" class="form-control search" placeholder="Search User" (keyup)="searchUser($event)">
+                    </label>
                 </div> 
             </div>  
         </div>
     </div>
 </section>
+<!-- End Search Bar Section -->
 
+<!-- Users Display -->
 <section class="user">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="users" *ngFor="let users of user">
-                    <div class="row">
+                <p class="ttl-reslts">Total Results: {{length}}</p>
+            </div>
+            <div class="col-md-12">
+                <div class="users" *ngFor="let users of user  | paginate: {
+                itemsPerPage: 5,
+                currentPage: p}; let i = index">
+                    <div class="row user_row">
                         <div class="col-md-3">
-                            <img src="{{users.avatar_url}}" alt="" style="width: 50px;height: 50px;">
+                            <img src="{{users.avatar_url}}" alt="" class="img-fluid rounded-circle user_avtar">
                         </div>
                         <div class="col-md-9">
                             <p class="user_name">
                                 {{users.login}}
                             </p>
                             <p class="user_profile">
-                                Profile
+                                Repos URL: {{users.repos_url}}
                             </p>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <p class="user_data">
-                                        Data One
+                                        Node ID: {{users.node_id}}
                                     </p>
                                     <p class="user_data">
-                                        Data: Two
+                                        Events URL: {{users.events_url}}
                                     </p>
                                 </div>
-                                <div class="col-md-6 text-right">
-                                    <button class="btn btn-primary toggle-btn" (click)="getUserDetail(users.login)" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                        Details
-                                    </button>  
+                                <div class="col-md-3 text-right">
+                                    <button class="btn btn-primary toggle-btn" (click)="getUserDetail($event, users.login)" type="button" data-toggle="collapse" [attr.data-target]="'#collapseExample_'+ users.id"  aria-expanded="false" aria-controls="collapseExample">Details</button>  
                                 </div>
                             </div> 
                         </div>
-                        <div class="col-md-12">
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body">
-                                    <div *ngFor="let userDetail of userDetail">
-                                        {{userDetail.name}}
-                                        {{userDetail.language}}
+                    </div>
+                    <div class="collapse" id="collapseExample_{{users.id}}">
+                        <div class="card card-body">
+                            <div class="table responvie">
+                                <table class="table table-striped text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Repository</th>
+                                            <th>Language</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let userDetail of userDetail">
+                                            <td width="50%">{{userDetail.name}}</td>
+                                            <td>{{userDetail.language}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p></p>
+                                    </div>
+                                    <div class="col-md-6">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+<!-- Users Display -->
+
+<section class="" *ngIf="user?.length <= 0">
+        <div class="cotainer">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p><b>Something Went Wrong</b></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Loader Display -->
+<section class="loader" *ngIf="isLoadingResults">
+    <div class="cotainer">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../../assets/image/loader.gif" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Loader Display -->
