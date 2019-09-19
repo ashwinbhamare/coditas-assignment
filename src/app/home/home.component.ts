@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
 
   // Get Searched User
   searchUser(event){
-      console.log(event);
       this.isLoadingResults = true;
         if(event.trim()){
             this.userService.searchUser(event)

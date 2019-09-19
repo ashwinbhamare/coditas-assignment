@@ -16,7 +16,6 @@ export class UserServiceService {
       return this.http.get(`https://api.github.com/users`)
       .pipe(
           map((res:any) => {
-              console.log(res);
               return res;
           }),
           catchError(this.handleError)
@@ -34,7 +33,6 @@ export class UserServiceService {
   }
 
   searchUser(SerchString:any){
-      console.log(SerchString);
       return this.http.get(`https://api.github.com/search/users?q=${SerchString}`)
       .pipe(
           map((res:any)=>{
