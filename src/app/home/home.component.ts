@@ -31,18 +31,22 @@ export class HomeComponent implements OnInit {
   }
 
   // get all users
-  getAllUsers(event=""){
-      this.isLoadingResults = true;
-      this.userService.getAllUsers()
-      .subscribe((res:any)=>{
-          if(res){ 
-              this.datasource = res;
-              this.length = res.length;
-              this.user = res;
-              this.isLoadingResults = false;
-          }
-      })
-  } 
+    getAllUsers(event=""){
+        this.isLoadingResults = true;
+        this.userService.getAllUsers()
+        .subscribe((res:any)=>{
+            if(res){
+                if(res != 'f'){ 
+                    this.datasource = res;
+                    this.length = res.length;
+                    this.user = res;
+                    this.isLoadingResults = false;
+                }else{
+                    this.isLoadingResults = false;
+                }
+            }
+        })
+    } 
 
   // Get UserDetail
   getUserDetail(event, username){
@@ -64,38 +68,66 @@ export class HomeComponent implements OnInit {
 
   // Get Searched User
   searchUser(event){
+      console.log(event);
       this.isLoadingResults = true;
-      this.userService.searchUser(event.target.value)
-      .subscribe((res:any)=>{
-          if(res){
-              this.user = res.items;
-              console.log(this.user);
-              this.isLoadingResults = false;
-          }
-      })
+        if(event.trim()){
+            this.userService.searchUser(event)
+            .subscribe((res:any)=>{
+                if(res){
+
+                    if(res != 'f'){
+                        this.user = res.items;
+                        this.length = res.items.length;
+                        this.isLoadingResults = false;
+                    }else{
+                        this.isLoadingResults = false;
+                    }
+                }
+            })
+        }else{
+            this.getAllUsers();
+        }
   }
 
   // Sort User Array
   sort(event){
-      if(event.target.value == 'a'){
-          this.user.sort(function(a, b){
-              var nameA=a.login.toLowerCase(), nameB=b.login.toLowerCase();
-              if (nameA < nameB) //sort string ascending
-                  return -1;
-              if (nameA > nameB)
-                  return 1;
-                  return 0; //default return value (no sorting)
-          });
-      }else if(event.target.value == 'z'){ 
-        this.user.sort(function(a, b){
+        if(event.target.value == 'a'){
+            this.user.sort(function(a, b){
+                var nameA=a.login.toLowerCase(), nameB=b.login.toLowerCase();
+                if (nameA < nameB) //sort string ascending
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                    return 0; //default return value (no sorting)
+            });
+        }else if(event.target.value == 'z'){ 
+            this.user.sort(function(a, b){
             var nameA=a.login.toLowerCase(), nameB=b.login.toLowerCase();
             if (nameA < nameB) //sort string descending
                 return 1;
             if (nameA > nameB)
                 return -1;
                 return 0; //default return value (no sorting)
-          });
-      }
+            });
+        }else if(event.target.value == '1'){
+            this.user.sort(function(a, b){
+                var nameA=a.id, nameB=b.id;
+                if (nameA < nameB) //sort string descending
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                    return 0; //default return value (no sorting)
+            });
+        }else if(event.target.value == '2'){
+            this.user.sort(function(a, b){
+                var nameA=a.id, nameB=b.id;
+                if (nameA < nameB) //sort string descending
+                    return 1;
+                if (nameA > nameB)
+                    return -1;
+                    return 0; //default return value (no sorting)
+            });
+        } 
     }
 
 }

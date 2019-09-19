@@ -4,17 +4,22 @@
         <div class="search_bar">
             <div class="row">    
                 <div class="col-md-6">
-                    <label class="sort-label">
-                        <select name="sort" id="" class="form-control sort" (change)="sort($event)">
-                            <option>Sort By Name</option>
-                            <option value="a">Name (A-Z)</option>
-                            <option value="z">Name (Z-A)</option>
+                    <label class="sort-label" for="sort">
+                        <select name="sort" id="sort" class="form-control sort" (change)="sort($event)">
+                            <option>Sort</option>
+                            <option value="a">Sort By Name (A-Z)</option>
+                            <option value="z">Sort By Name (Z-A)</option>
+                            <option  value="1">Sort By Rank &#xf176;</option>
+                            <option value="2">Sort By Rank &#xf175;</option>
                         </select>
                     </label>
                 </div>
                 <div class="col-md-6">
                     <label for="search" class="search_label">
-                        <input id="search" type="text" name="search" class="form-control search" placeholder="Search User" (keyup)="searchUser($event)">
+                        <input id="search" type="text" #search name="search" class="form-control search" placeholder="Search User">
+                        <button type="submit" for="search" class="searchanch" (click)='searchUser(search.value)'>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
                     </label>
                 </div> 
             </div>  
@@ -68,24 +73,23 @@
                                         <tr>
                                             <th>Repository</th>
                                             <th>Language</th>
+                                            <th>Open Issues</th>
+                                            <th>Watchers</th>
+                                            <th>Fork</th>
+                                            <th>Stargazers</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let userDetail of userDetail">
-                                            <td width="50%">{{userDetail.name}}</td>
+                                            <td>{{userDetail.name}}</td>
                                             <td>{{userDetail.language}}</td>
+                                            <td>{{userDetail.open_issues_count}}</td>
+                                            <td>{{userDetail.watchers}}</td>
+                                            <td>{{userDetail.forks_count}}</td>
+                                            <td>{{userDetail.stargazers_count}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <div >
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p></p>
-                                    </div>
-                                    <div class="col-md-6">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,7 +110,7 @@
         <div class="cotainer">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p><b>Something Went Wrong</b></p>
+                    <p><b>User Not Found</b></p>
                 </div>
             </div>
         </div>

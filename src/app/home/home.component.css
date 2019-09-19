@@ -11,24 +11,29 @@ select.sort{
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     appearance:none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 97%;
+    background-position-y: 8px;
+    font-family: 'FontAwesome', 'sans-serif';
 }
 .sort-label, .search_label{
     display: block;
     position: relative;
 }
-.search_label:after{
-    content:"\f002";
-    font-size: 17px;
-}
-.sort-label:after, .search_label:after{
-    font:normal normal normal 14px/1 FontAwesome;
+.searchanch {
     position: absolute;
-    top: 25%;
-    right: 10%;
-}
-.sort-label:after{
-    content:"\f107";
-    font-size: 20px;
+    top: 0%;
+    right: 0%;
+    cursor: pointer;
+    height: 100%;
+    text-align: center;
+    width: 40px;
+    padding-top: 1px;
+    background: #eeeeee59;
+    border: 0px;
+    border-left: 1px solid #ddd;
+    
 }
 
 /* Users */

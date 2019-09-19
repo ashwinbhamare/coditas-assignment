@@ -34,10 +34,15 @@ export class UserServiceService {
   }
 
   searchUser(SerchString:any){
+      console.log(SerchString);
       return this.http.get(`https://api.github.com/search/users?q=${SerchString}`)
       .pipe(
           map((res:any)=>{
-              return res;
+                if(res){
+                    return res;
+                }else{
+                    return false;
+                }
           }),
           catchError(this.handleError)
       );
@@ -53,6 +58,8 @@ export class UserServiceService {
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
       window.alert(errorMessage);
-      return throwError(errorMessage);
+
+    return 'false';
+    //   return throwError(errorMessage);
   }
 }
